@@ -11,17 +11,17 @@ class CadProduto extends StatefulWidget {
 }
 
 class _CadProdutoState extends State<CadProduto> {
-  final ProdutoQuimico lista = ProdutoQuimico();
+  final ProdutoQuimico produto = ProdutoQuimico();
 
   /*
   @override
   void initState() {
-   lista.add('Produto químico A');
-    lista.add('Produto químico B');
-    lista.add('Produto químico C');
-    lista.add('Produto químico D');
-    lista.add('Produto químico E');
-    lista.add('Produto químico F');
+   produto.add('Produto químico A');
+    produto.add('Produto químico B');
+    produto.add('Produto químico C');
+    produto.add('Produto químico D');
+    produto.add('Produto químico E');
+    produto.add('Produto químico F');
     ativo.add(false);
     ativo.add(false);
     ativo.add(false);
@@ -54,24 +54,24 @@ class _CadProdutoState extends State<CadProduto> {
               itemBuilder: (context, i) {
                 return CheckboxListTile(
                   title: Text(
-                    lista.nome[i],
+                    produto.nome[i],
                   ),
                   controlAffinity: 
                     ListTileControlAffinity.trailing,
-                    value: lista.ativo[i],
+                    value: produto.ativo[i],
                     onChanged: (bool marcado) {
                       setState(() {
-                        lista.ativo[i] = marcado;
+                        produto.ativo[i] = marcado;
                       });
                       
-                      print(lista.ativo[i]);
+                      //print(produto.ativo[i]);
                     },
                   activeColor: verde,
                   checkColor: Colors.white,
                   
                 );
               },
-              itemCount: lista.tamanho,
+              itemCount: produto.tamanho,
             ),
           )
         ],

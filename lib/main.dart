@@ -42,11 +42,22 @@ void main() {
         //fontFamily: 'ZenDots',
         textTheme: TextTheme(
           headline1:
-              TextStyle(fontSize: 26, fontFamily: 'ZenDots', color: verdeClaro),
-          headline2: TextStyle(
-            fontSize: 16,
-            color: verdeEscuro,
-          ),
+            TextStyle(
+              fontSize: 26,
+              fontFamily: 'ZenDots', 
+              color: verdeClaro
+            ),
+          headline2: 
+            TextStyle(
+              fontSize: 16,
+              color: verdeEscuro,
+            ),
+          headline3: 
+            TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w900,
+              color: verdeEscuro,
+            ),
         )),
   ));
 }

@@ -7,7 +7,7 @@ class ProdutoQuimico {
     'Produto E',
   ];
   List<double> qtd = [10.00, 5.00, 7.00, 9.00, 15.00];
-  List<bool> ativo = [true, false, true, false, false];
+  List<bool> ativo = [true, true, true, true, true];
   int tamanho = 5;
 
   void adicionarItem(String prod, double qtdProd) {

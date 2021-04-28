@@ -9,7 +9,7 @@ class CampoTexto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       textAlign: TextAlign.center,
       decoration: InputDecoration(
         labelText: titulo,
@@ -21,3 +21,4 @@ class CampoTexto extends StatelessWidget {
     );
   }
 }
+
