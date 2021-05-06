@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:syscpq/main.dart';
+import 'package:syscpq/objeto/produto_quimico.dart';
 
 class MeuMenu extends StatelessWidget {
+// declaração do produto
+  ProdutoQuimico produto = ProdutoQuimico();
+
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -16,7 +21,11 @@ class MeuMenu extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline2,
               ),
               onTap: () {
-                Navigator.popAndPushNamed(context, '/comprar');
+                Navigator.popAndPushNamed(
+                  context, 
+                  '/comprar', 
+                  arguments: produto
+                );
               },
               hoverColor: verde,
             ),
@@ -27,7 +36,11 @@ class MeuMenu extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline2,
               ),
               onTap: () {
-                Navigator.popAndPushNamed(context, '/utilizar');
+                Navigator.popAndPushNamed(
+                  context, 
+                  '/utilizar', 
+                  arguments: produto
+                );
               },
               hoverColor: verde,
             ),
@@ -38,7 +51,11 @@ class MeuMenu extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline2,
               ),
               onTap: () {
-                Navigator.popAndPushNamed(context, '/cadastrar');
+                Navigator.popAndPushNamed(
+                  context, 
+                  '/cadastrar',
+                  arguments: produto
+                );
               },
               hoverColor: verde,
             ),

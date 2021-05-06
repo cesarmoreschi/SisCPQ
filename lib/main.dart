@@ -18,10 +18,16 @@ var verde = Color.fromRGBO(00, 150, 103, 1.0);
 var verdeClaro = Color.fromRGBO(229, 244, 239, 1.0);
 
 void main() {
+  //ProdutoQuimico produtos = new ProdutoQuimico();
+
+
+
 
   runApp(MaterialApp(
+    
     debugShowCheckedModeBanner: false,
     title: 'SisCPQ',
+    
 
     //Rotas de navegação
     initialRoute: '/login',
@@ -42,22 +48,16 @@ void main() {
         //fontFamily: 'ZenDots',
         textTheme: TextTheme(
           headline1:
-            TextStyle(
-              fontSize: 26,
-              fontFamily: 'ZenDots', 
-              color: verdeClaro
-            ),
-          headline2: 
-            TextStyle(
-              fontSize: 16,
-              color: verdeEscuro,
-            ),
-          headline3: 
-            TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w900,
-              color: verdeEscuro,
-            ),
+              TextStyle(fontSize: 26, fontFamily: 'ZenDots', color: verdeClaro),
+          headline2: TextStyle(
+            fontSize: 16,
+            color: verdeEscuro,
+          ),
+          headline3: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w900,
+            color: verdeEscuro,
+          ),
         )),
   ));
 }

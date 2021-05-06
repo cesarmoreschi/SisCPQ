@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:syscpq/drawer.dart';
+import 'package:syscpq/elementos/campoTexto.dart';
 import 'package:syscpq/elementos/sair.dart';
 import 'package:syscpq/main.dart';
 import 'package:syscpq/objeto/produto_quimico.dart';
-//import 'package:syscpq/objeto/produto_quimico.dart';
 
 class CadProduto extends StatefulWidget {
   @override
@@ -11,29 +11,16 @@ class CadProduto extends StatefulWidget {
 }
 
 class _CadProdutoState extends State<CadProduto> {
-  final ProdutoQuimico produto = ProdutoQuimico();
+  // Variáveis para incrementar a quantidade de produtos.
+  var txtProduto = TextEditingController();
 
-  /*
-  @override
-  void initState() {
-   produto.add('Produto químico A');
-    produto.add('Produto químico B');
-    produto.add('Produto químico C');
-    produto.add('Produto químico D');
-    produto.add('Produto químico E');
-    produto.add('Produto químico F');
-    ativo.add(false);
-    ativo.add(false);
-    ativo.add(false);
-    ativo.add(false);
-    ativo.add(false);
-    ativo.add(false);
-    ativo.add(false);
-    super.initState();
-  }*/
+  // Chave de validação
+  var chaveItens = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final ProdutoQuimico produto = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -44,6 +31,13 @@ class _CadProdutoState extends State<CadProduto> {
         actions: [
           Sair(),
         ],
+        leading: IconButton(
+          onPressed: () {
+            Navigator.popAndPushNamed(context, '/tela_principal',
+                arguments: produto);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         //automaticallyImplyLeading: false,
       ),
       drawer: MeuMenu(),
@@ -54,26 +48,85 @@ class _CadProdutoState extends State<CadProduto> {
               itemBuilder: (context, i) {
                 return CheckboxListTile(
                   title: Text(
-                    produto.nome[i],
+                    produto.nome(i),
                   ),
-                  controlAffinity: 
-                    ListTileControlAffinity.trailing,
-                    value: produto.ativo[i],
-                    onChanged: (bool marcado) {
-                      setState(() {
-                        produto.ativo[i] = marcado;
-                      });
-                      
-                      //print(produto.ativo[i]);
-                    },
+                  controlAffinity: ListTileControlAffinity.trailing,
+                  value: produto.ativo(i),
+                  onChanged: (bool marcado) {
+                    //produto.ativo(i) = marcado;
+                    setState(() {
+                      produto.setProdutoAtivo(i, marcado);
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Operação realizada com suscesso.'),
+                        duration: Duration(seconds: 3),
+                      ),
+                    );
+
+                    //print(produto.ativo(i));
+                  },
                   activeColor: verde,
                   checkColor: Colors.white,
-                  
                 );
               },
-              itemCount: produto.tamanho,
+              itemCount: produto.tamanho(),
             ),
-          )
+          ),
+          Container(
+            padding: EdgeInsets.only(bottom: 10),
+            child: Form(
+              key: chaveItens,
+              child: FloatingActionButton(
+                onPressed: () async {
+                  await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Column(
+                            children: [
+                              CampoTexto("Nome do produto", false, txtProduto),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Cancelar')),
+                            TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    if (txtProduto.text.isNotEmpty) {
+                                      produto.adicionarItem(txtProduto.text);
+                                      txtProduto.clear();
+                                      Navigator.pop(context);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content:
+                                            Text('Item adicionado com sucesso!'),
+                                        duration: Duration(seconds: 3),
+                                      ));
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('Não foi inserido! Por favor, informe o nome do produto')));
+                                    }
+                                  });
+                                },
+                                child: Text('Inserir'))
+                          ],
+                        );
+                      });
+                },
+                child: Icon(
+                  Icons.add_rounded,
+                  size: 50,
+                ),
+                backgroundColor: verdeEscuro,
+                elevation: 50,
+              ),
+            ),
+          ),
         ],
       ),
     );
